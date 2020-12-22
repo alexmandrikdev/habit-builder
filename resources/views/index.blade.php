@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Habit Builder</title>
 </head>
-<body>
+<body class="bg-light">
     <div id="app"></div>
     <script src="/js/app.js"></script>
 </body>
