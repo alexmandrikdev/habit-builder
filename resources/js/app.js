@@ -6,14 +6,20 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import Vue from "vue";
 
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import VueRouter from "vue-router";
 
-// Install BootstrapVue
 Vue.use(BootstrapVue);
 
-//Main pages
-import App from "./components/App.vue";
+Vue.use(VueRouter);
 
-const app = new Vue({
-    el: "#app",
-    components: { App }
+import Index from "./views/Index.vue";
+
+const router = new VueRouter({
+    mode: "history",
+    routes: [{ path: "/", component: Index }]
+});
+
+new Vue({
+    router,
+    el: "#app"
 });
