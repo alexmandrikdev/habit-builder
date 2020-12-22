@@ -7,10 +7,7 @@
     <title>Habit Builder</title>
 </head>
 <body>
-    <div id="app">
-        <router-view></router-view>
-    </div>
-
+    <div id="app"></div>
     <script src="/js/app.js"></script>
 </body>
 </html>
