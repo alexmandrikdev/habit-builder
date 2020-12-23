@@ -41,9 +41,9 @@ export default {
     methods: {
         onSubmit() {
             axios.post('/login', this.formData).then(response => {
-                axios.get('/api/user').then(response => {
-                    console.log(response);
-                });
+                this.$store.commit('setIsAuthenticated', true);
+
+                this.$router.push('/');
             });
         },
     },

@@ -5,19 +5,19 @@
             style="max-width: 400px"
             @submit.prevent="onSubmit"
         >
+            <b-form-group label="Name:" label-for="name">
+                <b-form-input
+                    id="name"
+                    v-model="formData.name"
+                    required
+                ></b-form-input>
+            </b-form-group>
+
             <b-form-group label="Email:" label-for="email">
                 <b-form-input
                     id="email"
                     v-model="formData.email"
                     type="email"
-                    required
-                ></b-form-input>
-            </b-form-group>
-
-            <b-form-group label="Name:" label-for="name">
-                <b-form-input
-                    id="name"
-                    v-model="formData.name"
                     required
                 ></b-form-input>
             </b-form-group>
@@ -63,9 +63,9 @@ export default {
     methods: {
         onSubmit() {
             axios.post('/register', this.formData).then(response => {
-                axios.get('/api/user').then(response => {
-                    console.log(response);
-                });
+                this.$store.commit('setIsAuthenticated', true);
+
+                this.$router.push('/');
             });
         },
     },
