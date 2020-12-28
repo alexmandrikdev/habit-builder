@@ -15,4 +15,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+.gold {
+    color: #ffd700;
+}
+
+.silver {
+    color: #c0c0c0;
+}
+</style>

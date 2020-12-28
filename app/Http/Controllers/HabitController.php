@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\HabitStoreRequest;
 use App\Models\Habit;
-use Illuminate\Http\Request;
 
 class HabitController extends Controller
 {
     public function index()
     {
-        return auth()->user()->habits()->paginate(5);
+        $habits = auth()->user()->habits()
+            ->withSum('days', 'silver_stars')
+            ->withSum('days', 'golden_stars')
+            ->paginate(5);
+
+        return $habits;
     }
 
     public function store(HabitStoreRequest $request)

@@ -23,12 +23,14 @@
             </b-collapse>
 
             <div v-if="habits.length">
-                <b-card
-                    v-for="habit in habits"
-                    :key="habit.id"
-                    class="my-2"
-                    :title="habit.name"
-                >
+                <b-card v-for="habit in habits" :key="habit.id" class="my-2">
+                    <b-card-title>
+                        {{ habit.name }}
+                        {{ habit.days_sum_silver_stars }}
+                        <b-icon icon="star-fill" class="silver"></b-icon>
+                        {{ habit.days_sum_golden_stars }}
+                        <b-icon icon="star-fill" class="gold"></b-icon>
+                    </b-card-title>
                     <b-link :to="{ path: '/' + habit.id }">Open</b-link>
                 </b-card>
             </div>
@@ -85,6 +87,8 @@ export default {
             axios
                 .get(`/habits?page=${this.$route.query.page || 1}`)
                 .then(res => {
+                    // console.log(res.data);
+
                     this.habits = res.data.data;
                     this.perPage = res.data.per_page;
                     this.total = res.data.total;
