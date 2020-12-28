@@ -10,6 +10,8 @@ Vue.use(Router);
 const router = new Router({
     mode: 'history',
     routes: [
+        { path: '/register', component: Register },
+        { path: '/login', component: Login },
         {
             path: '/',
             component: Index,
@@ -17,8 +19,13 @@ const router = new Router({
                 requiresAuth: true,
             },
         },
-        { path: '/register', component: Register },
-        { path: '/login', component: Login },
+        {
+            path: '/:id',
+            component: Index,
+            meta: {
+                requiresAuth: true,
+            },
+        },
     ],
 });
 
