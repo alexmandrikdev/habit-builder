@@ -25,11 +25,15 @@ export default {
     },
     methods: {
         logout() {
+            axios.defaults.baseURL = '/';
+
             axios.post('/logout').then(() => {
                 this.$store.commit('setIsAuthenticated', false);
 
                 this.$router.push('/login');
             });
+
+            axios.defaults.baseURL = '/api/v1';
         },
     },
 };

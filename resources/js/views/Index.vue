@@ -63,7 +63,7 @@ export default {
     methods: {
         createHabit() {
             axios
-                .post('/api/v1/habits', {
+                .post('/habits', {
                     name: this.newHabit,
                 })
                 .then(res => {
@@ -83,7 +83,7 @@ export default {
             this.loading = true;
 
             axios
-                .get(`/api/v1/habits?page=${this.$route.query.page || 1}`)
+                .get(`/habits?page=${this.$route.query.page || 1}`)
                 .then(res => {
                     console.log(res.data);
 

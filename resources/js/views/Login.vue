@@ -40,11 +40,15 @@ export default {
     },
     methods: {
         onSubmit() {
+            axios.defaults.baseURL = '/';
+
             axios.post('/login', this.formData).then(response => {
                 this.$store.commit('setIsAuthenticated', true);
 
                 this.$router.push('/');
             });
+
+            axios.defaults.baseURL = '/api/v1';
         },
     },
 };
