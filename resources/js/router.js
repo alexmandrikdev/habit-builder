@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Index from './views/Index.vue';
 import Register from './views/Register.vue';
 import Login from './views/Login.vue';
+import Habit from './views/Habit.vue';
 import store from './store';
 
 Vue.use(Router);
@@ -21,7 +22,7 @@ const router = new Router({
         },
         {
             path: '/:id',
-            component: Index,
+            component: Habit,
             meta: {
                 requiresAuth: true,
             },

@@ -8,5 +8,5 @@ class Day extends Model
 {
     protected $guarded = ['id'];
 
-    protected $hidden = ['created_at', 'updated_at'];
+    protected $hidden = ['created_at', 'updated_at', 'habit_id'];
 }

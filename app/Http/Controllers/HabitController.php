@@ -32,4 +32,12 @@ class HabitController extends Controller
 
         return $habit;
     }
+
+    public function show(int $habitId)
+    {
+        return Habit::with(['days', 'goal'])
+            ->withSum('days', 'silver_stars')
+            ->withSum('days', 'golden_stars')
+            ->findOrFail($habitId);
+    }
 }
