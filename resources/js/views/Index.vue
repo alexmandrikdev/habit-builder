@@ -85,8 +85,6 @@ export default {
             axios
                 .get(`/habits?page=${this.$route.query.page || 1}`)
                 .then(res => {
-                    console.log(res.data);
-
                     this.habits = res.data.data;
                     this.perPage = res.data.per_page;
                     this.total = res.data.total;

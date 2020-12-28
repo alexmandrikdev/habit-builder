@@ -15,11 +15,17 @@ class HabitController extends Controller
 
     public function store(HabitStoreRequest $request)
     {
-        return Habit::create(array_merge(
+        $habit = Habit::create(array_merge(
             [
                 'user_id' => auth()->id()
             ],
             $request->validated()
         ));
+
+        $habit->days()->create([
+            'day' => 1
+        ]);
+
+        return $habit;
     }
 }

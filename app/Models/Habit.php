@@ -12,4 +12,9 @@ class Habit extends Model
     protected $guarded = ['id'];
 
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
+    public function days()
+    {
+        return $this->hasMany(Day::class);
+    }
 }
