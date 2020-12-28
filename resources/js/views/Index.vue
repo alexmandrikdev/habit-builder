@@ -4,7 +4,7 @@
             <b-spinner label="Loading..." class="mx-auto"></b-spinner>
         </div>
 
-        <div v-else>
+        <div v-else class="text-center">
             <b-button v-b-toggle.create-habit-form class="mb-3 mt-1"
                 >Add New Habit</b-button
             >
@@ -23,7 +23,11 @@
             </b-collapse>
 
             <div v-if="habits.length">
-                <b-card v-for="habit in habits" :key="habit.id" class="my-2">
+                <b-card
+                    v-for="habit in habits"
+                    :key="habit.id"
+                    class="my-2 text-center"
+                >
                     <b-card-title>
                         {{ habit.name }}
                         {{ habit.days_sum_silver_stars }}
@@ -31,7 +35,7 @@
                         {{ habit.days_sum_golden_stars }}
                         <b-icon icon="star-fill" class="gold"></b-icon>
                     </b-card-title>
-                    <b-link :to="{ path: '/' + habit.id }">Open</b-link>
+                    <b-button :to="{ path: '/' + habit.id }">Open</b-button>
                 </b-card>
             </div>
 
