@@ -93,7 +93,7 @@ export default {
 
             const day = goalDate.getDate();
 
-            goalDate.setDate(day + this.habit.goal.goal);
+            goalDate.setDate(day + parseInt(this.habit.goal.goal));
 
             return goalDate;
         },
