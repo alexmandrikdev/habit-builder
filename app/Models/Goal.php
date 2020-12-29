@@ -8,5 +8,9 @@ class Goal extends Model
 {
     protected $guarded = ['id'];
 
-    protected $hidden = ['created_at', 'updated_at'];
+    protected $hidden = ['updated_at'];
+
+    protected $casts = [
+        'finished_at' => 'datetime',
+    ];
 }

@@ -20,6 +20,6 @@ class Habit extends Model
 
     public function goal()
     {
-        return $this->hasOne(Goal::class);
+        return $this->hasOne(Goal::class)->whereNull('finished_at');
     }
 }

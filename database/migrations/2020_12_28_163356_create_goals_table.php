@@ -18,7 +18,7 @@ class CreateGoalsTable extends Migration
             $table->unsignedSmallInteger('goal');
             $table->unsignedBigInteger('habit_id');
             $table->foreign('habit_id')->references('id')->on('habits');
-            $table->dateTime('finished_at');
+            $table->dateTime('finished_at')->nullable();
             $table->timestamps();
         });
     }

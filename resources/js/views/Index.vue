@@ -14,6 +14,7 @@
                     <b-form-group>
                         <b-form-input
                             v-model="newHabit"
+                            class="text-center"
                             required
                             placeholder="New Habit"
                         ></b-form-input>
@@ -30,9 +31,9 @@
                 >
                     <b-card-title>
                         {{ habit.name }}
-                        {{ habit.days_sum_silver_stars }}
+                        {{ habit.days_sum_silver_stars || 0 }}
                         <b-icon icon="star-fill" class="silver"></b-icon>
-                        {{ habit.days_sum_golden_stars }}
+                        {{ habit.days_sum_golden_stars || 0 }}
                         <b-icon icon="star-fill" class="gold"></b-icon>
                     </b-card-title>
                     <b-button :to="{ path: '/' + habit.id }">Open</b-button>
