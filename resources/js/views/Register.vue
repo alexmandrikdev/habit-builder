@@ -53,7 +53,7 @@
                 </b-form-invalid-feedback>
             </b-form-group>
 
-            <b-button type="submit" variant="primary">Submit</b-button>
+            <b-button type="submit" variant="primary">Register</b-button>
         </b-form>
     </div>
 </template>
