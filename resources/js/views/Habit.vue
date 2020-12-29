@@ -27,6 +27,8 @@
             </div>
 
             <template v-else>
+                <timer :goal-date="goalDate"></timer>
+
                 <b-button v-b-modal.stop-modal variant="danger">Stop</b-button>
 
                 <b-modal
@@ -75,7 +77,10 @@
 </template>
 
 <script>
+import Timer from '../components/Timer.vue';
+
 export default {
+    components: { Timer },
     data() {
         return {
             habit: null,
@@ -83,6 +88,15 @@ export default {
         };
     },
     computed: {
+        goalDate() {
+            const goalDate = new Date(this.habit.goal.created_at);
+
+            const day = goalDate.getDate();
+
+            goalDate.setDate(day + this.habit.goal.goal);
+
+            return goalDate;
+        },
         week() {
             return this.$route.query.week || 1;
         },
