@@ -31,7 +31,12 @@ class HabitController extends Controller
 
     public function show(int $habitId)
     {
-        return Habit::with(['days', 'goal'])
+        return Habit::with([
+            'days' => function ($query) {
+                $query->orderBy('day');
+            },
+            'goal'
+        ])
             ->withSum('days', 'silver_stars')
             ->withSum('days', 'golden_stars')
             ->findOrFail($habitId);
