@@ -40,7 +40,7 @@
                         :to="{
                             path: `/${habit.id}?week=${Math.ceil(
                                 habit.days_max_day / 7,
-                            )}`,
+                            ) || 1}`,
                         }"
                         >Open</b-button
                     >
