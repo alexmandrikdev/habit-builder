@@ -27,17 +27,19 @@
             </div>
 
             <template v-else>
-                <h3 class="mt-4">
-                    Goal: {{ habit.goal.goal }} day{{
-                        habit.goal.goal != 1 ? 's' : ''
-                    }}
-                </h3>
+                <b-card class="my-4">
+                    <h3>
+                        Goal: {{ habit.goal.goal }} day{{
+                            habit.goal.goal != 1 ? 's' : ''
+                        }}
+                    </h3>
 
-                <timer :goal-date="goalDate"></timer>
+                    <timer class="my-2" :goal-date="goalDate"></timer>
 
-                <b-button v-b-modal.stop-modal variant="danger" class="mb-4"
-                    >Stop</b-button
-                >
+                    <b-button v-b-modal.stop-modal variant="danger"
+                        >Stop</b-button
+                    >
+                </b-card>
 
                 <b-modal
                     id="stop-modal"
