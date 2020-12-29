@@ -11,16 +11,26 @@
                     v-model="formData.email"
                     type="email"
                     required
+                    :state="loginError === null ? null : false"
                 ></b-form-input>
             </b-form-group>
 
-            <b-form-group label="Password:" label-for="password">
+            <b-form-group
+                label="Password:"
+                label-for="password"
+                :state="loginError === null ? null : false"
+            >
                 <b-form-input
                     id="password"
                     v-model="formData.password"
                     type="password"
                     required
+                    :state="loginError === null ? null : false"
                 ></b-form-input>
+
+                <b-form-invalid-feedback>
+                    {{ loginError }}
+                </b-form-invalid-feedback>
             </b-form-group>
 
             <b-button type="submit" variant="primary">Submit</b-button>
@@ -36,17 +46,23 @@ export default {
                 email: '',
                 password: '',
             },
+            loginError: null,
         };
     },
     methods: {
         onSubmit() {
             axios.defaults.baseURL = '/';
 
-            axios.post('/login', this.formData).then(response => {
-                this.$store.commit('setIsAuthenticated', true);
+            axios
+                .post('/login', this.formData)
+                .then(response => {
+                    this.$store.commit('setIsAuthenticated', true);
 
-                this.$router.push('/');
-            });
+                    this.$router.push('/');
+                })
+                .catch(error => {
+                    this.loginError = error.response.data.errors.email[0];
+                });
 
             axios.defaults.baseURL = '/api/v1';
         },
