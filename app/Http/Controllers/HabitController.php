@@ -10,6 +10,7 @@ class HabitController extends Controller
     public function index()
     {
         $habits = auth()->user()->habits()
+            ->with('goal')
             ->withSum('days', 'silver_stars')
             ->withSum('days', 'golden_stars')
             ->withMax('days', 'day')

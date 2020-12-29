@@ -36,6 +36,12 @@
                         {{ habit.days_sum_golden_stars || 0 }}
                         <b-icon icon="star-fill" class="gold"></b-icon>
                     </b-card-title>
+
+                    <timer
+                        v-if="habit.goal"
+                        :goal-date="calculateGoalDate(habit.goal)"
+                    />
+
                     <b-button
                         :to="{
                             path: `/${habit.id}?week=${Math.ceil(
@@ -60,7 +66,9 @@
 </template>
 
 <script>
+import Timer from '../components/Timer.vue';
 export default {
+    components: { Timer },
     data() {
         return {
             loading: false,
@@ -75,6 +83,15 @@ export default {
         this.fetchData();
     },
     methods: {
+        calculateGoalDate(goal) {
+            const goalDate = new Date(goal.created_at);
+
+            const day = goalDate.getDate();
+
+            goalDate.setDate(day + parseInt(goal.goal));
+
+            return goalDate;
+        },
         createHabit() {
             axios
                 .post('/habits', {
