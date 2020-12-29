@@ -1,7 +1,7 @@
 <template>
-    <h5 :class="[remainingTimeIsNegative ? 'text-success' : 'text-danger']">
+    <h3 :class="[remainingTimeIsNegative ? 'text-success' : 'text-danger']">
         {{ remainingTime }}
-    </h5>
+    </h3>
 </template>
 
 <script>
