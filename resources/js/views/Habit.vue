@@ -1,6 +1,10 @@
 <template>
     <div>
-        <div v-if="habit" class="text-center">
+        <div v-if="loading" class="text-center mt-5">
+            <b-spinner label="Loading..." class="mx-auto"></b-spinner>
+        </div>
+
+        <div v-else class="text-center">
             <h2 class="mb-3">
                 {{ habit.name }}
                 <span style="white-space: nowrap">
@@ -127,6 +131,7 @@ export default {
     components: { Timer },
     data() {
         return {
+            loading: false,
             habit: null,
             newGoal: null,
             currentState: null,
@@ -187,8 +192,12 @@ export default {
             this.currentState = Math.floor(diffTime / (1000 * 60 * 60 * 24));
         },
         fetchData() {
+            this.loading = true;
+
             axios.get(`/habits/${this.$route.params.id}`).then(res => {
                 this.habit = res.data;
+
+                this.loading = false;
             });
         },
         createGoal() {
