@@ -36,7 +36,14 @@
                         {{ habit.days_sum_golden_stars || 0 }}
                         <b-icon icon="star-fill" class="gold"></b-icon>
                     </b-card-title>
-                    <b-button :to="{ path: '/' + habit.id }">Open</b-button>
+                    <b-button
+                        :to="{
+                            path: `/${habit.id}?week=${Math.ceil(
+                                habit.days_max_day / 7,
+                            )}`,
+                        }"
+                        >Open</b-button
+                    >
                 </b-card>
             </div>
 

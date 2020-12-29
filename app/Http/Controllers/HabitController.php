@@ -12,6 +12,7 @@ class HabitController extends Controller
         $habits = auth()->user()->habits()
             ->withSum('days', 'silver_stars')
             ->withSum('days', 'golden_stars')
+            ->withMax('days', 'day')
             ->paginate(5);
 
         return $habits;
