@@ -49,25 +49,27 @@
                 </b-modal>
             </template>
 
-            <b-card v-for="day in weekDays" :key="day.day" class="my-2">
-                <b-card-title>Day {{ day.day }} </b-card-title>
-                <b-card-text>
-                    {{ day.silver_stars }}
-                    <b-icon icon="star-fill" class="silver"></b-icon>
-                    {{ day.golden_stars }}
-                    <b-icon icon="star-fill" class="gold"></b-icon
-                ></b-card-text>
-            </b-card>
+            <template v-if="habit.days.length">
+                <b-card v-for="day in weekDays" :key="day.day" class="my-2">
+                    <b-card-title>Day {{ day.day }} </b-card-title>
+                    <b-card-text>
+                        {{ day.silver_stars }}
+                        <b-icon icon="star-fill" class="silver"></b-icon>
+                        {{ day.golden_stars }}
+                        <b-icon icon="star-fill" class="gold"></b-icon
+                    ></b-card-text>
+                </b-card>
 
-            <h5 class="mt-4 mb-2">Weeks</h5>
-            <b-pagination
-                v-model="week"
-                align="center"
-                :total-rows="maxDay"
-                :per-page="7"
-                @change="handleWeekChange"
-            >
-            </b-pagination>
+                <h5 class="mt-4 mb-2">Weeks</h5>
+                <b-pagination
+                    v-model="week"
+                    align="center"
+                    :total-rows="maxDay"
+                    :per-page="7"
+                    @change="handleWeekChange"
+                >
+                </b-pagination>
+            </template>
         </div>
     </div>
 </template>
