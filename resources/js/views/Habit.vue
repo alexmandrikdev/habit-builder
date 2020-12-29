@@ -27,6 +27,12 @@
             </div>
 
             <template v-else>
+                <h3>
+                    Goal: {{ habit.goal.goal }} day{{
+                        habit.goal.goal != 1 ? 's' : ''
+                    }}
+                </h3>
+
                 <timer :goal-date="goalDate"></timer>
 
                 <b-button v-b-modal.stop-modal variant="danger">Stop</b-button>
