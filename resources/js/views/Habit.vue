@@ -4,9 +4,9 @@
             <h2 class="mb-3">
                 {{ habit.name }}
                 <span style="white-space: nowrap">
-                    {{ habit.days_sum_silver_stars }}
+                    {{ habit.days_sum_silver_stars || 0 }}
                     <b-icon icon="star-fill" class="silver"></b-icon>
-                    {{ habit.days_sum_golden_stars }}
+                    {{ habit.days_sum_golden_stars || 0 }}
                     <b-icon icon="star-fill" class="gold"></b-icon>
                 </span>
             </h2>
@@ -59,15 +59,14 @@
                 ></b-card-text>
             </b-card>
 
+            <h5 class="mt-4 mb-2">Weeks</h5>
             <b-pagination
                 v-model="week"
-                class="mt-4"
                 align="center"
                 :total-rows="maxDay"
                 :per-page="7"
                 @change="handleWeekChange"
             >
-                <template #page="{ page }"> Week {{ page }} </template>
             </b-pagination>
         </div>
     </div>
