@@ -65,7 +65,7 @@ export default {
         weekDays() {
             return this.habit.days.filter(
                 day =>
-                    day.day >= (this.week - 1) * 7 && day.day <= this.week * 7,
+                    day.day > (this.week - 1) * 7 && day.day <= this.week * 7,
             );
         },
         maxDay() {
