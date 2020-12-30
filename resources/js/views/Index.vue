@@ -30,11 +30,11 @@
                     class="my-2 text-center"
                 >
                     <b-card-title>
-                        {{ habit.name }}
-                        {{ habit.days_sum_silver_stars || 0 }}
-                        <b-icon icon="star-fill" class="silver"></b-icon>
-                        {{ habit.days_sum_golden_stars || 0 }}
-                        <b-icon icon="star-fill" class="gold"></b-icon>
+                        <base-text-and-stars
+                            :text="habit.name"
+                            :silver-stars="habit.days_sum_silver_stars || 0"
+                            :golden-stars="habit.days_sum_golden_stars || 0"
+                        />
                     </b-card-title>
 
                     <timer

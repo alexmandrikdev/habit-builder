@@ -10,9 +10,13 @@ import router from './router';
 import store from './store';
 import App from './App.vue';
 
+import BaseTextAndStars from './components/BaseTextAndStars.vue';
+
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.use(VueRouter);
+
+Vue.component('BaseTextAndStars', BaseTextAndStars);
 
 new Vue({
     router,

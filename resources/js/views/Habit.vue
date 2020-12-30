@@ -6,13 +6,11 @@
 
         <div v-else class="text-center">
             <h2 class="mb-3">
-                {{ habit.name }}
-                <span style="white-space: nowrap">
-                    {{ habit.days_sum_silver_stars || 0 }}
-                    <b-icon icon="star-fill" class="silver"></b-icon>
-                    {{ habit.days_sum_golden_stars || 0 }}
-                    <b-icon icon="star-fill" class="gold"></b-icon>
-                </span>
+                <base-text-and-stars
+                    :text="habit.name"
+                    :silver-stars="habit.days_sum_silver_stars || 0"
+                    :golden-stars="habit.days_sum_golden_stars || 0"
+                />
             </h2>
 
             <div v-if="!habit.goal" class="mt-5">
