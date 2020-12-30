@@ -11,13 +11,14 @@
                     :silver-stars="habit.days_sum_silver_stars || 0"
                     :golden-stars="habit.days_sum_golden_stars || 0"
                 />
-                <b-button
-                    :to="{ path: `/${habit.id}/stats` }"
-                    variant="primary"
-                >
+                <b-button v-b-toggle.stats variant="primary">
                     <b-icon icon="bar-chart" />
                 </b-button>
             </h2>
+
+            <b-collapse id="stats">
+                <stats />
+            </b-collapse>
 
             <goal-handler :fetch-data="fetchData" />
 
@@ -48,10 +49,12 @@
 
 <script>
 import GoalHandler from '../components/GoalHandler.vue';
+import Stats from '../components/Stats.vue';
+
 import { mapState } from 'vuex';
 
 export default {
-    components: { GoalHandler },
+    components: { GoalHandler, Stats },
     data() {
         return {
             loading: false,
