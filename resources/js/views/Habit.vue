@@ -124,19 +124,20 @@
 
 <script>
 import Timer from '../components/Timer.vue';
+import { mapState } from 'vuex';
 
 export default {
     components: { Timer },
     data() {
         return {
             loading: false,
-            habit: null,
             newGoal: null,
             currentState: null,
             currentStateInterval: null,
         };
     },
     computed: {
+        ...mapState(['habit']),
         goalDate() {
             const goalDate = new Date(this.habit.goal.created_at);
 
@@ -171,6 +172,9 @@ export default {
     beforeDestroy() {
         clearInterval(this.currentStateInterval);
     },
+    destroyed() {
+        this.$store.commit('setHabit', null);
+    },
     methods: {
         onModalShow() {
             this.calculateCurrentState();
@@ -193,7 +197,7 @@ export default {
             this.loading = true;
 
             axios.get(`/habits/${this.$route.params.id}`).then(res => {
-                this.habit = res.data;
+                this.$store.commit('setHabit', res.data);
 
                 this.loading = false;
             });
@@ -207,7 +211,7 @@ export default {
                 .then(res => {
                     this.newGoal = null;
 
-                    this.habit.goal = res.data;
+                    this.$store.commit('setHabitGoal', res.data);
                 });
         },
         finishGoal() {

@@ -8,12 +8,19 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         isAuthenticated: localStorage.getItem('isAuthenticated') === 'true',
+        habit: null,
     },
     mutations: {
         setIsAuthenticated(state, value) {
             localStorage.setItem('isAuthenticated', value);
 
             state.isAuthenticated = value;
+        },
+        setHabit(state, habit) {
+            state.habit = habit;
+        },
+        setHabitGoal(state, goal) {
+            state.habit.goal = goal;
         },
     },
     actions: {
