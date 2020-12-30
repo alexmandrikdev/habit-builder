@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'v1'], function () {
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
-        Route::apiResource('goals', GoalController::class)->only(['store', 'update']);
+        Route::apiResource('goals', GoalController::class)->only(['index', 'store', 'update']);
 
         Route::apiResource('habits', HabitController::class);
     });

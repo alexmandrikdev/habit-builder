@@ -11,6 +11,12 @@
                     :silver-stars="habit.days_sum_silver_stars || 0"
                     :golden-stars="habit.days_sum_golden_stars || 0"
                 />
+                <b-button
+                    :to="{ path: `/${habit.id}/stats` }"
+                    variant="primary"
+                >
+                    <b-icon icon="bar-chart" />
+                </b-button>
             </h2>
 
             <goal-handler :fetch-data="fetchData" />

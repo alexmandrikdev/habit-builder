@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IndexGoalRequest;
 use App\Http\Requests\StoreGoalRequest;
 use App\Http\Requests\UpdateGoalRequest;
 use App\Models\Day;
@@ -9,6 +10,16 @@ use App\Models\Goal;
 
 class GoalController extends Controller
 {
+    public function index(IndexGoalRequest $request): array
+    {
+        return Goal::where([
+            'habit_id' => $request->habit_id
+        ])
+            ->orderBy('created_at')
+            ->get()
+            ->toArray();
+    }
+
     public function store(StoreGoalRequest $request): Goal
     {
         return Goal::create([
