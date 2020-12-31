@@ -131,9 +131,9 @@ export default {
                     this.all.min = new Date(res.data[0].created_at);
                     this.minYear = this.all.min.getFullYear();
 
-                    this.all.max =
-                        new Date(res.data[res.data.length - 1].finished_at) ||
-                        new Date(res.data[res.data.length - 1].created_at);
+                    this.all.max = res.data[res.data.length - 1].finished_at
+                        ? new Date(res.data[res.data.length - 1].finished_at)
+                        : new Date(res.data[res.data.length - 1].created_at);
                     this.maxYear = this.all.max.getFullYear();
 
                     res.data.forEach(goal => {
@@ -176,7 +176,7 @@ export default {
             } else {
                 this.$refs.chart.zoomX(
                     new Date(`${this.month} 01 ${this.year}`).getTime(),
-                    new Date(`${this.month + 1} 01 ${this.year}`).getTime() - 1,
+                    new Date(this.year, this.month, 0).getTime(),
                 );
                 return;
             }
