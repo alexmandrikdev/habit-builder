@@ -33,7 +33,9 @@
                 </b-form-invalid-feedback>
             </b-form-group>
 
-            <b-button type="submit" variant="primary">Login</b-button>
+            <div class="text-center">
+                <b-button type="submit" variant="primary">Login</b-button>
+            </div>
         </b-form>
     </div>
 </template>

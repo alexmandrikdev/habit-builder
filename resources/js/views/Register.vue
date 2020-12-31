@@ -53,7 +53,9 @@
                 </b-form-invalid-feedback>
             </b-form-group>
 
-            <b-button type="submit" variant="primary">Register</b-button>
+            <div class="text-center">
+                <b-button type="submit" variant="primary">Register</b-button>
+            </div>
         </b-form>
     </div>
 </template>
