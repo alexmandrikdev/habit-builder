@@ -17,8 +17,12 @@ window.axios.defaults.baseURL = '/api/v1';
 
 window.axios.interceptors.response.use(
     response => response,
-    error => {
-        if (error.response.status === 401) {
+    async error => {
+        if ([401, 419].includes(error.response.status)) {
+            if (error.response.status === 419) {
+                await axios.get('csrf-token');
+            }
+
             store.dispatch('logout');
         }
 
