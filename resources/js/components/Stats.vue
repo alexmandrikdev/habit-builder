@@ -137,20 +137,27 @@ export default {
                     this.maxYear = this.all.max.getFullYear();
 
                     res.data.forEach(goal => {
-                        const finishedAt = new Date(goal.finished_at);
+                        const finishedAt = goal.finished_at
+                            ? new Date(goal.finished_at)
+                            : null;
                         const createdAt = new Date(goal.created_at);
 
                         this.series[0].data.push([createdAt.getTime(), 0]);
 
-                        this.series[0].data.push([
-                            finishedAt.getTime(),
-                            Math.floor(
-                                (finishedAt - createdAt) /
-                                    (1000 * 60 * 60 * 24),
-                            ),
-                        ]);
+                        if (finishedAt) {
+                            this.series[0].data.push([
+                                finishedAt.getTime(),
+                                Math.floor(
+                                    (finishedAt - createdAt) /
+                                        (1000 * 60 * 60 * 24),
+                                ),
+                            ]);
 
-                        this.series[0].data.push([finishedAt.getTime() + 1, 0]);
+                            this.series[0].data.push([
+                                finishedAt.getTime() + 1,
+                                0,
+                            ]);
+                        }
                     });
                 });
         },
