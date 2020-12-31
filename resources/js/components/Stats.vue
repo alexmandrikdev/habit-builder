@@ -1,15 +1,30 @@
 <template>
     <div>
-        <div v-if="series[0].data.length" id="chart">
-            <div id="chart-timeline">
-                <apexchart
-                    ref="chart"
-                    type="area"
-                    height="350"
-                    :options="chartOptions"
-                    :series="series"
-                ></apexchart>
+        <div v-if="series[0].data.length">
+            <div class="d-flex justify-content-center">
+                <b-form-select
+                    v-model="year"
+                    :options="yearOptions"
+                    style="max-width: 200px"
+                    class="mx-1"
+                    @change="zoom"
+                />
+                <b-form-select
+                    v-model="month"
+                    :options="monthOptions"
+                    style="max-width: 200px"
+                    class="mx-1"
+                    @change="zoom"
+                />
             </div>
+
+            <apexchart
+                ref="chart"
+                type="area"
+                height="350"
+                :options="chartOptions"
+                :series="series"
+            />
         </div>
         <div v-else class="text-center mt-5">
             <b-spinner label="Loading..." class="mx-auto"></b-spinner>
@@ -47,8 +62,6 @@ export default {
                 },
                 xaxis: {
                     type: 'datetime',
-                    min: new Date('01 Mar 2012').getTime(),
-                    tickAmount: 6,
                 },
                 tooltip: {
                     x: {
@@ -65,9 +78,41 @@ export default {
                     },
                 },
             },
-
-            selection: 'one_year',
+            year: null,
+            month: null,
+            minYear: null,
+            maxYear: null,
+            all: {
+                min: null,
+                max: null,
+            },
+            monthOptions: [
+                { value: null, text: 'Month' },
+                { value: 1, text: 'January' },
+                { value: 2, text: 'February' },
+                { value: 3, text: 'March' },
+                { value: 4, text: 'April' },
+                { value: 5, text: 'May' },
+                { value: 6, text: 'June' },
+                { value: 7, text: 'July' },
+                { value: 8, text: 'August' },
+                { value: 9, text: 'September' },
+                { value: 10, text: 'October' },
+                { value: 11, text: 'November' },
+                { value: 12, text: 'December' },
+            ],
         };
+    },
+    computed: {
+        yearOptions() {
+            let years = [{ value: null, text: 'Years' }];
+
+            for (let year = this.minYear; year <= this.maxYear; year++) {
+                years.push(year);
+            }
+
+            return years;
+        },
     },
     created() {
         this.fetchData();
@@ -82,6 +127,14 @@ export default {
                     this.chartOptions.xaxis.min = new Date(
                         res.data[0].created_at,
                     ).getTime();
+
+                    this.all.min = new Date(res.data[0].created_at);
+                    this.minYear = this.all.min.getFullYear();
+
+                    this.all.max =
+                        new Date(res.data[res.data.length - 1].finished_at) ||
+                        new Date(res.data[res.data.length - 1].created_at);
+                    this.maxYear = this.all.max.getFullYear();
 
                     res.data.forEach(goal => {
                         const finishedAt = new Date(goal.finished_at);
@@ -100,6 +153,26 @@ export default {
                         this.series[0].data.push([finishedAt.getTime() + 1, 0]);
                     });
                 });
+        },
+        zoom() {
+            if (this.year === null) {
+                this.$refs.chart.zoomX(this.all.min, this.all.max);
+                return;
+            }
+
+            if (this.month === null) {
+                this.$refs.chart.zoomX(
+                    new Date(`01 Jan ${this.year}`).getTime(),
+                    new Date(`31 Dec ${this.year}`).getTime(),
+                );
+                return;
+            } else {
+                this.$refs.chart.zoomX(
+                    new Date(`${this.month} 01 ${this.year}`).getTime(),
+                    new Date(`${this.month + 1} 01 ${this.year}`).getTime() - 1,
+                );
+                return;
+            }
         },
     },
 };
