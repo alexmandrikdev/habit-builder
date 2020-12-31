@@ -96,6 +96,8 @@ export default {
                                     (1000 * 60 * 60 * 24),
                             ),
                         ]);
+
+                        this.series[0].data.push([finishedAt.getTime() + 1, 0]);
                     });
                 });
         },
