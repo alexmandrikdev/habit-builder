@@ -43,6 +43,10 @@ export default {
         return {
             series: [
                 {
+                    name: 'Goal',
+                    data: [],
+                },
+                {
                     name: 'State',
                     data: [],
                 },
@@ -77,6 +81,7 @@ export default {
                         stops: [0, 100],
                     },
                 },
+                colors: ['#C82333', '#008FFB'],
             },
             year: null,
             month: null,
@@ -140,17 +145,34 @@ export default {
                         const finishedAt = goal.finished_at
                             ? new Date(goal.finished_at)
                             : null;
+
                         const createdAt = new Date(goal.created_at);
 
-                        this.series[0].data.push([createdAt.getTime(), 0]);
+                        this.series[1].data.push([createdAt.getTime(), 0]);
+
+                        this.series[0].data.push([createdAt.getTime() - 1, 0]);
+
+                        this.series[0].data.push([
+                            createdAt.getTime(),
+                            goal.goal,
+                        ]);
 
                         if (finishedAt) {
-                            this.series[0].data.push([
+                            this.series[1].data.push([
                                 finishedAt.getTime(),
                                 Math.floor(
                                     (finishedAt - createdAt) /
                                         (1000 * 60 * 60 * 24),
                                 ),
+                            ]);
+                            this.series[0].data.push([
+                                finishedAt.getTime(),
+                                goal.goal,
+                            ]);
+
+                            this.series[1].data.push([
+                                finishedAt.getTime() + 1,
+                                0,
                             ]);
 
                             this.series[0].data.push([
