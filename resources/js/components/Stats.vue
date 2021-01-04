@@ -55,7 +55,7 @@ export default {
                 chart: {
                     id: 'area-datetime',
                     type: 'area',
-                    height: 350,
+                    height: 450,
                     zoom: {
                         autoScaleYaxis: true,
                     },
@@ -69,7 +69,7 @@ export default {
                 },
                 tooltip: {
                     x: {
-                        format: 'dd MMM yyyy',
+                        format: 'yyyy MMM dd HH:mm:ss',
                     },
                 },
                 fill: {
