@@ -33,6 +33,13 @@
                 </b-form-invalid-feedback>
             </b-form-group>
 
+            <b-form-checkbox
+                v-model="formData.remember"
+                :unchecked-value="null"
+            >
+                Remember me
+            </b-form-checkbox>
+
             <div class="text-center">
                 <b-button type="submit" variant="primary">Login</b-button>
             </div>
@@ -47,6 +54,7 @@ export default {
             formData: {
                 email: '',
                 password: '',
+                remember: null,
             },
             loginError: null,
         };
